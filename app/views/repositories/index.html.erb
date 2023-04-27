@@ -4,7 +4,12 @@
     <%= text_field_tag(:search_term, '', placeholder: 'Enter search term...', required: true, class: "form-control", aria__describedby: "button-addon2" ) %>
     <%= submit_tag('Search', class: "btn btn-outline-secondary", id: "button-addon2") %>
   </div>
+  <label for="sort_by">Sort by</label>
+  <%= select_tag(:sort_by, options_for_select(@sorting_criterias), include_blank: true, id: 'sort_by', class: "btn btn-secondary dropdown-toggle") %>
+  <label for="order_direction">Order</label>
+  <%= select_tag(:order_direction, options_for_select(@order_direction), include_blank: true, id: 'order_direction', class: "btn btn-secondary dropdown-toggle") %>
 <% end %>
+<br>
 <% if @error_message %>
   <p><%= @error_message %></p>
 <% end %>

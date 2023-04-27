@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class RepositoriesController < ApplicationController
-  def index
-  end
+  before_action :set_sorting_methods
+
+  def index; end
 
   def search
     search_term = params[:search_term].to_s.strip
@@ -11,7 +12,17 @@ class RepositoriesController < ApplicationController
       @error_message = 'Please enter a search term'
       render :index
     else
-      fetch_result = RepositoriesFetcher.call(search_term)
+      sort_by = params[:sort_by]
+      order_direction = params[:order_direction]
+
+      if sort_by.present?
+        options = {
+          sort: sort_by,
+          order: order_direction || 'desc'
+        }
+      end
+
+      fetch_result = RepositoriesFetcher.call(search_term, options || {})
 
       @repositories = fetch_result[:repositories]
       @total_count = fetch_result[:total_count]
@@ -26,5 +37,12 @@ class RepositoriesController < ApplicationController
         redirect_to root_path, locals: { error_message: @error_message }
       end
     end
+  end
+
+  private
+
+  def set_sorting_methods
+    @sorting_criterias = RepositoriesFetcher::SORT_BY
+    @order_direction = RepositoriesFetcher::ORDER_BY
   end
 end
