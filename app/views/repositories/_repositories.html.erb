@@ -1,4 +1,7 @@
 <%= turbo_frame_tag "repositories" do %>
+  <% if @total_count %>
+    <h3><%= pluralize(@total_count, 'repository') %> found</h3>
+  <% end %>
   <table class="table table-striped">
     <thead>
       <tr>

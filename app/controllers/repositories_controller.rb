@@ -21,6 +21,7 @@ class RepositoriesController < ApplicationController
 
       if response.code.to_i == 200
         @repositories = data['items']
+        @total_count = data['total_count']
       else
         @error_message = 'Failed to fetch repositories. Please try again later.'
       end
