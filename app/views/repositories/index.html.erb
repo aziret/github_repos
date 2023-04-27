@@ -9,5 +9,5 @@
   <p><%= @error_message %></p>
 <% end %>
 <%= turbo_frame_tag "repositories" do %>
-  <%= render @repositories if @repositories %>
+  <%= render partial: 'repositories' %>
 <% end %>

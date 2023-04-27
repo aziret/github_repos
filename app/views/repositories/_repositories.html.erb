@@ -2,26 +2,28 @@
   <% if @total_count %>
     <h3><%= pluralize(@total_count, 'repository') %> found</h3>
   <% end %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Full name</th>
-        <th>Link</th>
-        <th>Stars</th>
-        <th>Topics</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @repositories.each do |repository| %>
+  <% if @repositories %>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= repository['name'] %></td>
-          <td><%= repository['full_name']%></td>
-          <td><%= link_to('🔗', repository['html_url'], target: '_blank') %></td>
-          <td><%= repository['stargazers_count']%></td>
-          <td><%= repository['topics'].join(' | ') %></td>
+          <th>Name</th>
+          <th>Full name</th>
+          <th>Link</th>
+          <th>Stars</th>
+          <th>Topics</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @repositories.each do |repository| %>
+          <tr>
+            <td><%= repository['name'] %></td>
+            <td><%= repository['full_name']%></td>
+            <td><%= link_to('🔗', repository['html_url'], target: '_blank') %></td>
+            <td><%= repository['stargazers_count']%></td>
+            <td><%= repository['topics'].join(' | ') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
