@@ -1,4 +1,4 @@
-require 'net/http'
+# frozen_string_literal: true
 
 class RepositoriesController < ApplicationController
   def index
@@ -12,19 +12,11 @@ class RepositoriesController < ApplicationController
       @error_message = 'Please enter a search term'
       render :index
     else
-      url = URI.parse("https://api.github.com/search/repositories?q=#{search_term}")
-      http = Net::HTTP.new(url.host, url.port)
-      http.use_ssl = true
-      request = Net::HTTP::Get.new(url.request_uri)
-      response = http.request(request)
-      data = JSON.parse(response.body)
+      fetch_result = RepositoriesFetcher.call(search_term)
 
-      if response.code.to_i == 200
-        @repositories = data['items']
-        @total_count = data['total_count']
-      else
-        @error_message = 'Failed to fetch repositories. Please try again later.'
-      end
+      @repositories = fetch_result[:repositories]
+      @total_count = fetch_result[:total_count]
+      @error_message = fetch_result[:error_message]
 
       if @repositories
         respond_to do |format|
