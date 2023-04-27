@@ -1,7 +1,24 @@
 <%= turbo_frame_tag "repositories" do %>
-    <% @repositories.each do |repository| %>
-        <div>
-            <%= link_to(repository['name'], repository['html_url'], target: '_blank') %>
-        </div>
-    <% end %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Full name</th>
+        <th>Link</th>
+        <th>Stars</th>
+        <th>Topics</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @repositories.each do |repository| %>
+        <tr>
+          <td><%= repository['name'] %></td>
+          <td><%= repository['full_name']%></td>
+          <td><%= link_to('🔗', repository['html_url'], target: '_blank') %></td>
+          <td><%= repository['stargazers_count']%></td>
+          <td><%= repository['topics'].join(' | ') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
