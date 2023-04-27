@@ -1,5 +1,5 @@
 <h1>GitHub Repositories Search</h1>
-<%= form_tag('/repositories/search', method: :post) do %>
+<%= form_tag('/repositories/search', method: :get) do %>
   <div class="input-group mb-3">
     <%= text_field_tag(:search_term, '', placeholder: 'Enter search term...', required: true, class: "form-control", aria__describedby: "button-addon2" ) %>
     <%= submit_tag('Search', class: "btn btn-outline-secondary", id: "button-addon2") %>
