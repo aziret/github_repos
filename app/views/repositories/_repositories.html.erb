@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "repositories" do %>
+    <% @repositories.each do |repository| %>
+        <div>
+            <%= link_to(repository['name'], repository['html_url'], target: '_blank') %>
+        </div>
+    <% end %>
+<% end %>

@@ -1,0 +1,11 @@
+<h1>GitHub Repositories Search</h1>
+<%= form_tag('/repositories/search', method: :post) do %>
+  <%= text_field_tag(:search_term, '', placeholder: 'Enter search term...', required: true) %>
+  <%= submit_tag('Search') %>
+<% end %>
+<% if @error_message %>
+  <p><%= @error_message %></p>
+<% end %>
+<%= turbo_frame_tag "repositories" do %>
+  <%= render @repositories if @repositories %>
+<% end %>
