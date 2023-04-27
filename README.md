@@ -1,24 +1,11 @@
-# README
+# Thoughts on how to continue the logic:
+1. Github allows sorting and pagination https://docs.github.com/en/rest/search?apiVersion=2022-11-28#search-repositories
+- we can use `sort`, `order`, `per_page` and `page` params, to further refine the app
+- `sort` is partially covered
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+2. Github allows narrowing the results using the repository search qualifiers in any combination https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories
+- we can use those qualifiers to make our search more specific
 
-Things you may want to cover:
+3. Cache our search results, to make less requests to the API
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+4. Need to add more test cases, add input validations
